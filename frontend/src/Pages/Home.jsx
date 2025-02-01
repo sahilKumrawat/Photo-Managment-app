@@ -87,7 +87,7 @@ function Home() {
         let obj = userList.find(item => item.id == Number(search))
         if (!obj) {
             setSearch('')
-            setSearchedObj()
+            setSearchedObj({})
             return handleError("Not Found User")
         } else {
             setSearchedObj(obj)
@@ -147,7 +147,7 @@ function Home() {
             <ToastContainer />
         </div>
         <div style={{ position: 'fixed', bottom: '0', right: '0' }}>
-            {searchedObj ?
+            {searchedObj.name ?
                 <>
                 <button  onClick={() => {setSearchedObj(), setSearch("")}}>Back </button>
                 </>
