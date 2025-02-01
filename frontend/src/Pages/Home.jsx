@@ -149,7 +149,7 @@ function Home() {
         <div style={{ position: 'fixed', bottom: '0', right: '0' }}>
             {searchedObj.name ?
                 <>
-                <button  onClick={() => {setSearchedObj(), setSearch("")}}>Back </button>
+                <button  onClick={() => {setSearchedObj({}), setSearch("")}}>Back </button>
                 </>
                 :
                 <>
