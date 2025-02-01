@@ -92,9 +92,16 @@
   align-items: center;
 }
 
+span {
+  margin-left: 16px;
+}
+
+.home-dev{
+  
+}
 .container{
-  border: "2px solid white";
-  display: "inline-flex";
-  marginTop: "20%";
-  marginLeft: "20%";
+  border: 2px solid white;
+  display: inline-flex;
+  margin-top: 20%;
+  margin-left: 20%;
 }
