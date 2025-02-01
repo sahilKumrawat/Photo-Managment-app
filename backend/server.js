@@ -11,7 +11,8 @@ require('./Models/db');
 const PORT = process.env.PORT || 3000;
 
 const corsOptions = {
-    origin: process.env.FRONTEND_URL,
+    origin:  "*",
+    credential : true,
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"]
 }
