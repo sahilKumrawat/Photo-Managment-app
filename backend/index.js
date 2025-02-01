@@ -4,17 +4,24 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const AuthRouter = require('./Routes/AuthRouter');
 const ProductRouter = require('./Routes/ProductRouter');
+const dotenv = require('dotenv')
 
-require('dotenv').config();
+dotenv.config();
 require('./Models/db');
 const PORT = process.env.PORT || 3000;
 
-app.get('/ping', (req, res) => {
-    res.send('PONG');
+const corsOptions = {
+    origin: process.env.FRONTEND_URL,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+}
+
+app.get('/work', (req, res) => {
+    res.send('working server....');
 });
 
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use('/auth', AuthRouter);
 app.use('/products', ProductRouter);
 
