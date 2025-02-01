@@ -117,7 +117,7 @@ function Home() {
         <div className='home-div'>
             <div style={{ marginLeft: "37%", marginTop: "14px" }}>
                 <input style={{ height: "40px", width: '30%', border: "2px solid white", borderRadius: '19px', padding: "8px" }} type="text"
-                    onChange={(e) => setSearch(e.target.value)} value={search} />
+                    onChange={(e) => setSearch(e.target.value)} value={search} placeholder='Enter Album Id' />
                 <button style={{ marginLeft: "5px" }} onClick={handleSearch}><FaSearch /></button>
             </div >
 
@@ -135,7 +135,7 @@ function Home() {
                     {
                         chunkList && chunkList?.map((item, index) => (
                             <div style={(item.flag) ? styleCard : style} key={index}>
-                                <img src='../../public/1.png' alt="Photo" />
+                                <img src='https://github.com/sahilKumrawat/Photo-Managment-app/blob/master/frontend/public/1.png?raw=true' alt="Photo" />
                                 <p>{item.name}</p>
                                 <p style={{ backgroundColor: "gray", borderRadius: '6px', textAlign: 'center' }}>Album : {item.id}</p>
                             </div>
