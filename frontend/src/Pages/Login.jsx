@@ -60,7 +60,7 @@ function Login() {
 
     return (
         <div className='container'>
-            <h1>Login change</h1>
+            <h1>Login</h1>
             <form onSubmit={handleLogin}>
                 <div>
                     <label htmlFor='email'>Email</label>
