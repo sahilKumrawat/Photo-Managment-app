@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify';
 import { handleError, handleSuccess } from '../utils';
+import { RiLockPasswordLine } from "react-icons/ri";
+import { FiEye } from "react-icons/fi";
+
 
 function Signup() {
 
@@ -10,7 +13,7 @@ function Signup() {
         email: '',
         password: ''
     })
-
+    const [showPass, setShowPass] = useState(false)
     const navigate = useNavigate();
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -53,13 +56,20 @@ function Signup() {
             handleError(err);
         }
     }
+
+    const handleShowPass = () => {
+        setShowPass(!showPass)
+    }
+
     return (
-        <div className='container'>
-            <h1>Signup</h1>
-            <form onSubmit={handleSignup}>
-                <div>
-                    <label htmlFor='name'>Name</label>
+        <div className='parent'>
+            <div className='fram1'>
+                <h1>Welcome to Fewerclicks!</h1>
+                {/* <form onSubmit={handleSignup}> */}
+                <div className='div-form'>
+                    <label className='label-custom' htmlFor='name'>Name</label><br />
                     <input
+                        className='input-custom'
                         onChange={handleChange}
                         type='text'
                         name='name'
@@ -68,9 +78,10 @@ function Signup() {
                         value={signupInfo.name}
                     />
                 </div>
-                <div>
-                    <label htmlFor='email'>Email</label>
+                <div className='div-form'>
+                    <label className='label-custom' htmlFor='email'>Email</label><br />
                     <input
+                        className='input-custom'
                         onChange={handleChange}
                         type='email'
                         name='email'
@@ -78,22 +89,32 @@ function Signup() {
                         value={signupInfo.email}
                     />
                 </div>
-                <div>
-                    <label htmlFor='password'>Password</label>
-                    <input
-                        onChange={handleChange}
-                        type='password'
-                        name='password'
-                        placeholder='Enter your password...'
-                        value={signupInfo.password}
-                    />
+                <div className='div-form'>
+                    <label className='label-custom' htmlFor='password'><RiLockPasswordLine /> Password</label><br />
+                    <span>
+                        <input
+                            className='input-custom'
+                            onChange={handleChange}
+                            type={showPass ? 'text' : 'password'}
+                            name='password'
+                            placeholder='Enter your password...'
+                            value={signupInfo.password}
+                        /><button className='eye-button' onMouseDown={handleShowPass} onMouseUp={handleShowPass}><FiEye /></button></span>
+
                 </div>
-                <button type='submit'>Signup</button>
-                <span>Already have an account ?
-                    <Link to="/login">Login</Link>
+                <span style={{ marginLeft: "245px" }}>Already have an account ?
+                    <Link to="/login"> Login</Link>
                 </span>
-            </form>
-            <ToastContainer />
+                <div className='div-last-button'>
+                    <button className='button-custom' onClick={handleSignup}>Signup</button>
+                </div>
+                {/* </form> */}
+                <ToastContainer />
+            </div>
+            <div className='fram2' >
+                <img style={{ height: "70%" }} src="../../../public/grp-pic.png" alt="" />
+                <p style={{ color: "white", margin: "20px" }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br /> At sed mi, convallis pellentesque.</p>
+            </div>
         </div>
     )
 }
