@@ -4,6 +4,8 @@ import { ToastContainer } from 'react-toastify';
 import { handleError, handleSuccess } from '../utils';
 import { useDispatch } from 'react-redux';
 import { storeUser } from '../currentUserSlice';
+import { RiLockPasswordLine } from "react-icons/ri";
+import { FiEye } from "react-icons/fi";
 
 function Login() {
 
@@ -13,6 +15,7 @@ function Login() {
     })
     const dispatch = useDispatch()
     const navigate = useNavigate();
+    const [showPass, setShowPass]= useState(false)
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -23,6 +26,7 @@ function Login() {
     }
 
     const handleLogin = async (e) => {
+        console.log("....login fun")
         e.preventDefault();
         const { email, password } = loginInfo;
         if (!email || !password) {
@@ -41,7 +45,7 @@ function Login() {
             const { success, message, jwtToken, name, error } = result;
             if (success) {
                 handleSuccess(message);
-                dispatch(storeUser([{"jwtToken" : jwtToken, "name" : name}]))
+                dispatch(storeUser([{ "jwtToken": jwtToken, "name": name }]))
                 setTimeout(() => {
                     navigate('/home')
                 }, 1000)
@@ -58,37 +62,55 @@ function Login() {
         }
     }
 
+    const handleShowPass = ()=>{
+        setShowPass(!showPass)
+    }
+
     return (
-        <div className='container'>
-            <h1>Login</h1>
-            <form onSubmit={handleLogin}>
-                <div>
-                    <label htmlFor='email'>Email</label>
-                    <input
-                        onChange={handleChange}
-                        type='email'
-                        name='email'
-                        placeholder='Enter your email...'
-                        value={loginInfo.email}
-                    />
-                </div>
-                <div>
-                    <label htmlFor='password'>Password</label>
-                    <input
-                        onChange={handleChange}
-                        type='password'
-                        name='password'
-                        placeholder='Enter your password...'
-                        value={loginInfo.password}
-                    />
-                </div>
-                <button type='submit'>Login</button>
-                <span>Does't have an account ?
-                    <Link to="/signup">Signup</Link>
-                </span>
-            </form>
-            <ToastContainer />
+        <div className='parent'>
+            <div className='fram1'>
+                <h1>Welcome to Fewerclicks!</h1>
+                {/* <form onSubmit={handleLogin}> */}
+                    <div className='div-form'>
+                        <label className='label-custom' htmlFor='email'>Email</label><br />
+                        <input
+                            className='input-custom'
+                            onChange={handleChange}
+                            type='email'
+                            name='email'
+                            placeholder='Enter your email...'
+                            value={loginInfo.email}
+                        />
+                    </div>
+                    <div className='div-form'>
+                        <label className='label-custom' htmlFor='password'><RiLockPasswordLine /> Password</label><br />
+                        <span>
+                            <input
+                                className='input-custom'
+                                onChange={handleChange}
+                                type={showPass ? 'text':'password'}
+                                name='password'
+                                placeholder='Enter your password...'
+                                value={loginInfo.password}
+                            /><button className='eye-button' onMouseDown={handleShowPass} onMouseUp={handleShowPass}><FiEye /></button></span>
+                    </div>
+                    <span className='span-from'>
+                        <Link to="/signup">Signup</Link>
+                    </span>
+                    <div className='div-last-button'>
+                        <button className='button-custom' onClick={handleLogin}>Login</button>
+                    </div>
+                {/* </form> */}
+
+
+                <ToastContainer />
+            </div>
+            <div className='fram2' >
+                <img style={{ height: "70%" }} src="../../../public/grp-pic.png" alt="" />
+                <p style={{ color: "white", margin: "20px" }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br /> At sed mi, convallis pellentesque.</p>
+            </div>
         </div>
+
     )
 }
 
